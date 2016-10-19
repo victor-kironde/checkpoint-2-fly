@@ -35,11 +35,13 @@ gem 'jbuilder', '~> 2.5'
 
 group :test do
   gem 'capybara'
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
 end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 4.7'
 end
 
 group :development do
