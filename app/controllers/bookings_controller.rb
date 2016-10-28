@@ -62,7 +62,6 @@ class BookingsController < ApplicationController
   end
 
   private
-
   def find_booking_by_id
     @booking = Booking.find(params[:id])
   end
