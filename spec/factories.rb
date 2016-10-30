@@ -3,8 +3,7 @@ FactoryGirl.define do
     cost 1
   end
   factory :passenger do
-    first_name "MyString"
-    last_name "MyString"
+    name "MyString"
     email "MyString"
     passport_number "MyString"
   end

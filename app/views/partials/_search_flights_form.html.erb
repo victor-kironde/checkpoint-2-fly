@@ -1,23 +1,23 @@
-<%= form_tag("/search_flight", remote: true, method: "get", id: "search-flights", class: "") do %>
-  <input type="hidden" name="location" id="location">
-  <input type="hidden" name="destination" id="destination">
-  <p class="">
-    <i class="icon-plane"></i>
-    <%= text_field_tag "", "", id: "location_name", class: "typeahead", placeholder: "Select origin" %>
-  </p>
-  <p class="destination_airport">
-    <i class=''></i>
-    <%= text_field_tag "", "", id: "destination_name", class: "typeahead", placeholder: "Select destination" %>
-  </p>
-  <p id="dept-date">
-    <i class=""></i>
-    <%= text_field_tag "when", "", placeholder: "Departure date", id: "ddate" %>
-  </p>
-  <p id="pass">
-    <i class="icon-people"></i>
-    <%= number_field_tag "passengers", "", placeholder: "Passengers"%>
-  </p>
-  <%= button_tag(type: "submit", class: "btn") do %>
-    <i class="icon-magnifier"></i> Search flights
-  <% end %>
-<% end %>
+<%=form_for @flight do |f|  %>
+<p>
+	<%=f.label 'From' %> <br>
+	<%=f.text_field :departure %>
+</p>
+<p>
+	<%=f.label 'To' %> <br>
+  
+<%= f.select :departure, options_for_select([
+  ["Select One", ""],
+  "Your nick name",
+  "your schoool name",
+  "your love name",
+  "your comapnay name",
+  "your favourite website"]),
+  {}, { class: "form form-group form-control" } %>
+
+</p>
+<p>
+	<%=f.submit %>
+
+</p>
+<%end%>
