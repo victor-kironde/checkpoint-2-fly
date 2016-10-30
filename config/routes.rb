@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :bookings, :passengers
+  resources :bookings, :passengers, :flights
   root 'flight#index'
+  get "search_flights" => "flights#search_flights", as: "search_flights", defaults: { format: 'js' }
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
