@@ -1,23 +1,34 @@
-<%= form_tag("/search_flight", remote: true, method: "get", id: "search-flights", class: "") do %>
-  <input type="hidden" name="location" id="location">
-  <input type="hidden" name="destination" id="destination">
-  <p class="">
-    <i class="icon-plane"></i>
-    <%= text_field_tag "", "", id: "location_name", class: "typeahead", placeholder: "Select origin" %>
-  </p>
-  <p class="destination_airport">
-    <i class=''></i>
-    <%= text_field_tag "", "", id: "destination_name", class: "typeahead", placeholder: "Select destination" %>
-  </p>
-  <p id="dept-date">
-    <i class=""></i>
-    <%= text_field_tag "when", "", placeholder: "Departure date", id: "ddate" %>
-  </p>
-  <p id="pass">
-    <i class="icon-people"></i>
-    <%= number_field_tag "passengers", "", placeholder: "Passengers"%>
-  </p>
-  <%= button_tag(type: "submit", class: "btn") do %>
-    <i class="icon-magnifier"></i> Search flights
+<div>
+  <%= form_tag flights_path, method: 'get', remote: true do %>
+
+    <div>
+      <div>
+        <%= select_tag(:origin, options_from_collection_for_select(@airports, :code, :formatted)) %>
+        <%= label_tag("Origin") %>
+      </div>
+
+      <div>
+        <%= select_tag(:destination, options_from_collection_for_select(@airports, :code, :formatted), :prompt => "Anywhere") %>
+        <%= label_tag("Destination") %>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <%= select_tag(:passengers, options_for_select((1..10).to_a)) %>
+        <%= label_tag("Passengers") %>
+      </div>
+
+      <div class="input-field">
+        <input type="date" name="date" class="datepicker">
+      </div>
+    </div>
+
+    <div>
+      <button id="search" class="btn" type="submit">Search
+
+      </button>
+    </div>
+
   <% end %>
-<% end %>
+</div>
