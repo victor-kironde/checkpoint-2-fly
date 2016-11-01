@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates :name, presence: true, uniqueness: {case_sensitive: false}, length: {minimum: 3, maximum:25}
+  validates :first_name, :last_name, presence: true, uniqueness: {case_sensitive: false}, length: {minimum: 3, maximum:25}
   has_many :bookings
 
 
