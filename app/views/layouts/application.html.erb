@@ -7,16 +7,13 @@
     <link href="https://fonts.googleapis.com/css?family=Kalam" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
   </head>
-
   <body>
     <%= render "layouts/nav" %>
+    <%= render "layouts/messages" %>
     <%= yield %>
     <%= render "layouts/footer" %>
-
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
 
