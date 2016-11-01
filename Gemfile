@@ -9,6 +9,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'bcrypt', '~> 3.1.7'
 
 group :test do
   gem 'capybara'
@@ -20,7 +21,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.7'
   gem 'pry', '~> 0.10.3'
   gem 'pg'
-  gem 'bcrypt', '~> 3.1.7'
+
 end
 
 group :development do
