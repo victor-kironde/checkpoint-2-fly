@@ -1,1 +1,42 @@
+<div class="container">
+  <div class="row">
 
+    <% if @bookings.empty? %>
+      <% flash.now[:danger] = "you have no past bookings."%>
+    <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th data-field="origin">ORIGIN</th>
+          <th data-field="destination">DESTINATION</th>
+          <th data-field="date">DEPARTURE DATE</th>
+          <th data-field="price">TOTAL PRICE</th>
+          <th data-field="date_booked">DATE BOOKED</th>
+          <th data-field="view">LINK TO VIEW</th>
+          <th data-field="edit">LINK TO EDIT</th>
+          <th data-field="delete">LINK TO CANCEL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bookings.each do |booking| %>
+          <tr>
+            <td><%= booking.flight.origin_airport.name %></td>
+            <td><%= booking.flight.destination_airport.name %></td>
+            <td><%= booking.departure.strftime '%Y-%m-%d' %></td>
+            <td><%= "#{booking.price} USD" %></td>
+            <td><%= booking.updated_at.strftime '%Y-%m-%d %H:%M' %></td>
+            <td><%= link_to "View", booking %></td>
+            <td><%= link_to "Edit", edit_booking_path(booking) %></td>
+            <% if booking_expired(booking) %>
+              <td>EXPIRED</td>
+            <% else %>
+              <td><%= link_to "Cancel Booking", booking_path(booking), method: :delete, data: { confirm: "Are you sure you want to cancel this boooking?" }%></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <% end %>
+  </div>
+</div>
