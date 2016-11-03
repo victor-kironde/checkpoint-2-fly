@@ -2,7 +2,6 @@ class BookingsController < ApplicationController
   before_action :find_booking_by_code, only: [:manage]
   before_action :find_booking_by_id, only: [:show, :edit, :update, :destroy]
   before_action :require_login, only: [:edit, :update, :destroy]
-
   def new
     flight = Flight.find_by id: params[:flight]
     if flight
@@ -32,6 +31,7 @@ class BookingsController < ApplicationController
   end
 
   def edit
+    @booking = Booking.find(params[:id])
   end
 
   def update
@@ -47,6 +47,7 @@ class BookingsController < ApplicationController
   end
 
   def destroy
+    @booking = Booking.find(params[:id])
     @booking.destroy
     flash[:success] = booking_deleted
     redirect_to bookings_user_path(current_user)
