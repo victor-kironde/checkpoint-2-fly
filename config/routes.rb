@@ -11,11 +11,10 @@ Rails.application.routes.draw do
       get "find"
     end
   end
-  root 'flight#index'
+  root 'flights#home'
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  get "search_flights" => "flights#search_flights", as: "search_flights", defaults: { format: 'js' }
 
 end

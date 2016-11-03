@@ -6,7 +6,4 @@ class Airport < ApplicationRecord
   def formatted
     "#{country} - #{city} - #{name} (#{code})"
   end
-  
-  scope :airports_all, -> { order("id ASC") }
-
 end

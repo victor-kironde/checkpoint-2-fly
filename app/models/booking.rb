@@ -1,19 +1,22 @@
 class Booking < ApplicationRecord
-  belongs_to :flight, inverse_of: :bookings
-  has_many :passengers, inverse_of: :booking
-
-  VALID_REGEX_EMAIL = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-
-  validates :booking_code,
-            presence: true
-
-  validates :flight_id,
-            presence: true
-
-  validates :user_id,
-            presence: true
-
+  include BookingsHelper
+  belongs_to :flight
+  belongs_to :user, optional: true
+  has_many :passengers, inverse_of: :booking, dependent: :destroy
+  accepts_nested_attributes_for :passengers, allow_destroy: true
+  validates :reference, :price, :departure, presence: true
   validates :email,
             presence: true,
-            format: { with: VALID_REGEX_EMAIL }
+            length: { maximum: 255 }
+  before_validation :generate_reference, :set_price, on: :create
+  before_create :generate_reference, :set_price
+  
+  def generate_reference
+    self.reference = "#{SecureRandom.hex(3)}/#{flight.id}/#{flight.number}".upcase
+  end
+
+  def set_price
+    self.price = total_booking_cost(flight, passengers.size)
+  end
+
 end

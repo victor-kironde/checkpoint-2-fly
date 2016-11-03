@@ -1,0 +1,9 @@
+$('#results').empty()
+<% if @search.errors.any? %>
+  <% @search.errors.each do |error| %>
+    <%= error %>
+  <% end %>
+<% else %>
+  $('#results')
+    .html("<%= j(render partial: 'partials/flight_results', locals: { search: @search } ) %>");
+<% end %>
