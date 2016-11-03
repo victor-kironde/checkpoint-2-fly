@@ -1,56 +1,75 @@
-<h1 align="center" >Sign up</h1>
-<div class='row'>
-	<div class='col-xs-12'>
-		<%= form_for(@user, :html => {class: " form-horizontal", role: "form" }) do |f| %>
-		<div class="form-group">
-			<div class="control-label col-sm-2">
-				<%= f.label :first_name %>
-			</div>
-			<div class="col-sm-8">
-				<%= f.text_field :first_name, class: "form-control", placeholder: "First Name", autofocus: true %>
+<div class="container">
+	<div class="row main">
+		<div class="panel-heading">
+			<div class="panel-title text-center">
+				<h1 class="title">Sign Up</h1>
+				<hr/>
 			</div>
 		</div>
-		<div class="form-group">
-			<div class="control-label col-sm-2">
-				<%= f.label :last_name %>
+		<div class="main-login main-center">
+			<%= form_for(@user, :html => {class: " form-horizontal", role: "form" }) do |f| %>
+			<div class="form-group">
+				<%= f.label :first_name, :html => {class: "cols-sm-2 control-label"} %>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-user fa" aria-hidden="true"></i>
+						</span>
+						<%= f.text_field :first_name, class: "form-control", id:"firstname", placeholder: "First Name", autofocus: true %>
+					</div>
+				</div>
 			</div>
-			<div class="col-sm-8">
-				<%= f.text_field :last_name, class: "form-control", placeholder: "Last Name", autofocus: true %>
+			<div class="form-group">
+				<%= f.label :last_name, :html => {class: "cols-sm-2 control-label"} %>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-user fa" aria-hidden="true"></i>
+						</span>
+						<%= f.text_field :last_name, class: "form-control", id:"lastname", placeholder: "Last Name", autofocus: true %>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="control-label col-sm-2">
-				<%= f.label :email %>
-			</div>
-			<div class="col-sm-8">
-				<%= f.email_field :email, class: "form-control", placeholder: "Enter Email" %>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="control-label col-sm-2">
-				<%= f.label :password %>
-			</div>
-			<div class="col-sm-8">
-				<%= f.password_field :password, class: "form-control", placeholder: "Enter password" %>
-			</div>
-		</div>
 
-
-		<div class="form-group">
-		  <div class="control-label col-sm-2">
-		    <%= f.label :password_confirmation, "Confirm Password" %>
-		  </div>
-		  <div class="col-sm-8">
-		    <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Password", autofocus: "off" %>
-		  </div>
-		</div>
-
-
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<%= f.submit "Sign Up", class: 'btn btn-primary btn-lg' %>
+			<div class="form-group">
+				<%= f.label :email, :html => {class: "cols-sm-2 control-label"} %>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-envelope fa" aria-hidden="true"></i>
+						</span>
+						<%= f.email_field :email, class: "form-control", id:"email", placeholder: "Email", autofocus: true %>
+					</div>
+				</div>
 			</div>
+			<div class="form-group">
+				<%= f.label :password, :html => {class: "cols-sm-2 control-label"} %>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+						</span>
+						<%= f.password_field :password, class: "form-control", id: "password", placeholder: "Enter password" %>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :password_confirmation, :html => {class: "cols-sm-2 control-label"} %>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+						</span>
+						<%= f.password_field :password_confirmation, class: "form-control", id: "confirm", placeholder: "Confirm Password", autofocus: "off" %>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group ">
+				<%= f.submit "Register", class: "btn btn-primary btn-lg btn-block login-button" %>
+			</div>
+			<% end %>
 		</div>
-		<% end %>
 	</div>
 </div>
