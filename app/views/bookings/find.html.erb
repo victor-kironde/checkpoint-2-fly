@@ -1,0 +1,15 @@
+<div class="container">
+   <div class="row jumbotron">
+      <%= form_tag manage_bookings_path, method: 'get', id: "booking_form" do %>
+      <div id="manage">
+         <h4>Manage Booking</h4>
+            <div class="form-group">
+               <%= label_tag :ref, "Confirmation Number" %>
+               <%= text_field_tag :ref %>
+            </div>
+               <button id="search" class="btn btn-success" type="submit">Search
+               </button>
+      </div>
+      <% end %>
+   </div>
+</div>

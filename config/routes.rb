@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
-  root 'pages#index'
+  resources :passengers, :flights
+  resources :users, only: [:create] do
+    member do
+      get "bookings"
+    end
+  end
+  resources :bookings, except: [:index] do
+    collection do
+      get "manage"
+      get "find"
+    end
+  end
+  root 'flights#home'
+  get 'signup' => 'users#new'
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

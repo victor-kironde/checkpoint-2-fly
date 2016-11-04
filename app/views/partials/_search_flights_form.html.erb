@@ -1,0 +1,27 @@
+<div class="container">
+  <%= form_tag flights_path, method: 'get', remote: true do %>
+    <div>
+      <div class="form-group">
+        <%= label_tag("Origin") %>
+        <%= select_tag(:origin, options_from_collection_for_select(@airports, :code, :formatted)) %>
+      </div>
+      <div>
+        <%= label_tag("Destination") %>
+        <%= select_tag(:destination, options_from_collection_for_select(@airports, :code, :formatted), :prompt => "Anywhere") %>
+      </div>
+    </div>
+    <div>
+      <div class="form-group">
+        <%= label_tag("Passengers") %>
+        <%= select_tag(:passengers, options_for_select((1..10).to_a)) %>
+      </div>
+      <div class="form-group">
+        <input type="date" name="date" class="datepicker">
+      </div>
+    </div>
+    <div class="form-group">
+      <button id="search" class="btn btn-success" type="submit">Search
+      </button>
+    </div>
+  <% end %>
+</div>

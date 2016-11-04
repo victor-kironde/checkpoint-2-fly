@@ -1,0 +1,28 @@
+<%= form_tag new_booking_path, class: "row",
+  method: 'get', id: "flight_view" do %>
+
+  <% @date = @search.date %>
+  <% @search.flights.each do |flight| %>
+    <% @flight = flight %>
+    <div class="well well-lg">
+      <div>
+        <%= label_tag 'flight_label', "Book Now (#{flight.price} USD)", for: flight.id%>
+        <input name="flight" value = <%= flight.id %> type="radio" id = <%= flight.id %> />
+      </div>
+      <div>
+        <%= render partial: "partials/flight" %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= hidden_field_tag "passengers", @search.passengers %>
+  <%= hidden_field_tag "departure", @search.date.strftime("%Y-%m-%d") %>
+
+    <div>
+      <button id="select"
+        class="btn btn-success"
+          type="submit">Select Flight
+      </button>
+    </div>
+
+<% end %>
