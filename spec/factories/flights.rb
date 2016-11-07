@@ -6,7 +6,6 @@ FactoryGirl.define do
     distance Faker::Number.positive
     duration Faker::Number.between(1, 12)
     price Faker::Number.positive
-
     airline
   end
 end
