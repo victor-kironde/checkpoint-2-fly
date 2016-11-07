@@ -10,7 +10,7 @@ class Booking < ApplicationRecord
             length: { maximum: 255 }
   before_validation :generate_reference, :set_price, on: :create
   before_create :generate_reference, :set_price
-  
+
   def generate_reference
     self.reference = "#{SecureRandom.hex(3)}/#{flight.id}/#{flight.number}".upcase
   end
