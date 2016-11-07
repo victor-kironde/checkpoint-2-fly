@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.3.0"
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
 gem 'puma', '~> 3.0'
@@ -15,6 +16,9 @@ gem 'bcrypt', '~> 3.1.7'
 group :test do
   gem 'capybara'
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
+  gem 'guard-rspec'
+  gem 'launchy'
+  gem 'rails-controller-testing'
 end
 group :development, :test do
   gem 'byebug', platform: :mri
