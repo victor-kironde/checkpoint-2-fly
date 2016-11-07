@@ -31,8 +31,9 @@
 
       <div class="input-field col s12 m12 l12">
       <% if current_user %>
-        <%= f.text_field :email, type: :email, 'disabled value' => current_user.email %>
         <%= f.label :email, "Your email" %>
+        <%= f.text_field :email, type: :email, 'disabled value' => current_user.email %>
+
         <%= hidden_field_tag "booking[email]", current_user.email%>
       <% else %>
         <%= f.text_field :email, type: :email %>
