@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Passenger, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to belong_to(:booking) }
+  it { is_expected.to validate_presence_of :name }
+  it { is_expected.to validate_presence_of :passport_number }
+  it { is_expected.to validate_presence_of :phone }
+  it { is_expected.to validate_presence_of :email }
 end
