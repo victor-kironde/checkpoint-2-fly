@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :passengers, :flights
+  resources :flights, only: [:index]
   resources :users, only: [:create] do
     member do
       get "bookings"
