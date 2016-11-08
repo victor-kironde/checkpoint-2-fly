@@ -22,7 +22,7 @@
         <tbody>
             <% @search.flights.each do |flight| %>
             <% @flight = flight %>
-            <%= render partial: "partials/flight" %>
+            <%= render partial: "partials/flight", locals:{} %>
             <% end %>
             <%= hidden_field_tag "passengers", @search.passengers %>
             <%= hidden_field_tag "departure", @search.date.strftime("%Y-%m-%d") %>
