@@ -2,7 +2,7 @@
   <div class="row">
 
     <% if @bookings.empty? %>
-      <% flash.now[:danger] = "you have no past bookings."%>
+      <% flash.now[:danger] = "You have no past bookings."%>
     <% else %>
     <table>
       <thead>
@@ -14,7 +14,7 @@
           <th data-field="date_booked">DATE BOOKED</th>
           <th data-field="view">VIEW</th>
           <th data-field="edit">EDIT</th>
-          <th data-field="delete">CANCEL</th>
+          <th data-field="delete">CANCEL BOOKING</th>
         </tr>
       </thead>
       <tbody>
@@ -30,7 +30,7 @@
             <% if booking_expired(booking) %>
               <td>EXPIRED</td>
             <% else %>
-              <td><%= link_to "Cancel Booking", booking_path(booking), method: :delete, data: { confirm: "Are you sure you want to cancel this boooking?" }%></td>
+              <td><%= link_to "Cancel", booking_path(booking), method: :delete, data: { confirm: "Are you sure you want to cancel this boooking?" }%></td>
             <% end %>
           </tr>
         <% end %>
