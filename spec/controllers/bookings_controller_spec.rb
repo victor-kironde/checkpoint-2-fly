@@ -51,14 +51,7 @@ RSpec.describe BookingsController, type: :controller do
       expect(assigns(:booking)).to eq(booking)
     end
   end
-
-  describe "GET #new" do
-    it "assigns a new booking as @booking" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:booking)).to be_a_new(Booking)
-    end
-  end
-
+  
   describe "GET #edit" do
     it "assigns the requested booking as @booking" do
       booking = Booking.create! valid_attributes
