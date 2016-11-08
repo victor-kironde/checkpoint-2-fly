@@ -8,61 +8,25 @@
 		</div>
     <div class="main-center">
   <%= form_tag flights_path, method: 'get', remote: true do %>
-	<div class="form-group">
-	<div  class: "cols-sm-2 control-label">
-		<%= label_tag("Origin") %>
-	</div>
-		<div class="cols-sm-10">
-			<div class="input-group select-style">
-				<span class="input-group-addon">
-					<i class="fa fa-plane" aria-hidden="true"></i>
-				</span>
-				<%= select_tag(:origin, options_from_collection_for_select(@airports, :code, :formatted), class: "form-control", placeholder: "origin", id: "origin") %>
-			</div>
-		</div>
-	</div>
-
-	<div class="form-group">
-	<div  class: "cols-sm-2 control-label">
-		<%= label_tag("Destination") %>
-	</div>
-		<div class="cols-sm-10">
-			<div class="input-group select-style">
-				<span class="input-group-addon">
-					<i class="fa fa-home fa" aria-hidden="true"></i>
-				</span>
-				<%= select_tag(:destination, options_from_collection_for_select(@airports, :code, :formatted), class: "form-control", placeholder: "destination", id: "origin", :prompt => "All") %>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="form-group">
-	<div  class: "cols-sm-2 control-label">
-		<%= label_tag("Passengers") %>
-	</div>
-		<div class="cols-sm-10">
-			<div class="input-group select-style">
-				<span class="input-group-addon">
-					<i class="fa fa-user fa" aria-hidden="true"></i>
-				</span>
-				<%= select_tag(:passengers, options_for_select((1..10).to_a), class: "form-control") %>
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-	<div  class: "cols-sm-2 control-label">
-		<%= label_tag("Date") %>
-	</div>
-		<div class="cols-sm-10">
-			<div class="input-group select-style">
-				<span class="input-group-addon">
-					<i class="fa fa-calendar fa" aria-hidden="true"></i>
-				</span>
-				<input type="date" id = "date" name="date" class="datepicker form-control">
-			</div>
-		</div>
-	</div>
+    <div>
+      <div class="form-group">
+        <%= label_tag("Origin") %>
+        <%= select_tag(:origin, options_from_collection_for_select(@airports, :code, :formatted)) %>
+      </div>
+      <div>
+        <%= label_tag("Destination") %>
+        <%= select_tag(:destination, options_from_collection_for_select(@airports, :code, :formatted), :prompt => "All") %>
+      </div>
+    </div>
+    <div>
+      <div class="form-group">
+        <%= label_tag("Passengers") %>
+        <%= select_tag(:passengers, options_for_select((1..10).to_a)) %>
+      </div>
+      <div class="form-group">
+        <input type="date" name="date" class="datepicker">
+      </div>
+    </div>
     <div class="form-group">
       <button id="search" class="btn btn-success" type="submit">Search
       </button>
