@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def current_user_or_default
     @current_user || User.default_user
   end
-
+  
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
