@@ -1,20 +1,10 @@
-<div class="row">
-<div class="col-xs-8 col-xs-offset-2">
-<div class="article-title">
-          <%= @flight.origin %>
-</div>
-<div class="article-actions">
-          <%= @flight.departure.strftime "%H:%M" %>
-          <%= @flight.origin_airport.city %>
-        </div>
-<%= @date.strftime "%Y-%m-%d" %>
-<%= @flight.destination %>
-<%= @flight.arrival_date(@date).strftime "%H:%M" %>
-<%= @flight.destination_airport.city %>
-<%= @flight.airline.name %>
-Flight Number: <%= @flight.number %>
-
-<%= "#{@flight.price} USD" %>
-</div>
-</div>
-</div>
+<tr>
+  <td><input name="flight" value=<%= @flight.id %> type="radio" id=<%= @flight.id %>/></td>
+  <td><%= @flight.origin_airport.city %></td>
+  <td><%= @flight.destination_airport.city %></td>
+  <td><%= @flight.departure.strftime "%H:%M" %> | <%= @date.strftime "%Y-%m-%d" %></td>
+  <td><%= @flight.airline.name %></td>
+  <td><%= @flight.number %></td>
+  <td><%= @flight.arrival_date(@date).strftime "%H:%M" %></td>
+  <td><%= "#{@flight.price} USD" %></td>
+</tr>
