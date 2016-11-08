@@ -19,13 +19,13 @@ group :test do
   gem 'guard-rspec'
   gem 'launchy'
   gem 'rails-controller-testing'
+  gem 'selenium-webdriver'
 end
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 4.7'
   gem 'pry', '~> 0.10.3'
-  gem 'pg'
   gem 'faker'
 end
 
