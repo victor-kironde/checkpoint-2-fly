@@ -1,7 +1,7 @@
 class FlightsController < ApplicationController
-  before_action :get_airports, only: [:home]
 
   def home
+    @airports = Airport.get_airports
   end
 
   def index
@@ -13,12 +13,5 @@ class FlightsController < ApplicationController
     respond_to do |format|
       format.js {}
     end
-  end
-
-  private
-
-  def get_airports
-    @airports = Airport.order(country: :asc,
-      city: :asc, name: :asc, code: :asc)
   end
 end
