@@ -7,7 +7,8 @@ class Booking < ApplicationRecord
   validates :reference, :price, :departure, presence: true
   validates :email,
             presence: true,
-            length: { maximum: 255 }
+            length: { maximum: 255 },
+            format: { with: VALID_EMAIL }
   before_validation :generate_reference, :set_price, on: :create
   before_create :generate_reference, :set_price
 
@@ -17,5 +18,9 @@ class Booking < ApplicationRecord
 
   def set_price
     self.price = total_booking_cost(flight, passengers.size)
+  end
+
+  def expired?
+    flight.departure_date(departure) < Time.now
   end
 end

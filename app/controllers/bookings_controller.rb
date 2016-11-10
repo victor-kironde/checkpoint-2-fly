@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
     flight = Flight.find_by id: booking_params[:flight_id]
     @booking = flight.bookings.new(booking_params)
     if @booking.save
-      BookingMailer.booking_confirmation(@booking).deliver_later
+      BookingMailer.booking_confirmation(@booking).deliver_now
       redirect_to @booking, alert: "Booking successfully created."
     else
       params[:passengers] = booking_params[:passengers_attributes].length
@@ -33,7 +33,7 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     if @booking.update(booking_params)
-      BookingMailer.booking_confirmation(@booking).deliver_later
+      BookingMailer.booking_confirmation(@booking).deliver_now
       redirect_to @booking, alert: "Booking updated successfully."
     else
       params[:passengers] = booking_params[:passengers_attributes].length
