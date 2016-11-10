@@ -9,7 +9,7 @@ class Airport < ApplicationRecord
 
 
   def self.get_airports
-     Airport.order(country: :asc,
+     self.order(country: :asc,
       city: :asc, name: :asc, code: :asc)
   end
 

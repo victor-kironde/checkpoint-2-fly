@@ -33,7 +33,7 @@ RSpec.describe BookingsController, type: :controller do
         expect(response).to render_template("new")
       end
     end
-    
+
     context "when flight was not selected" do
       before(:each) { get :new }
 
