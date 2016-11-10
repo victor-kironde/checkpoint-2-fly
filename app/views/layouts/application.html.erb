@@ -13,10 +13,10 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= render "layouts/nav" %>
+    <%= render "partials/nav" %>
     <%= render "layouts/messages" %>
     <%= yield %>
-    <%= render "layouts/footer" %>
+    <%= render "partials/footer" %>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>

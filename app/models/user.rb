@@ -5,7 +5,6 @@ class User < ApplicationRecord
             confirmation: true,
             length: { minimum: 6 }
   validates :password_confirmation, presence: true
-  VALID_EMAIL = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   validates :email,
             uniqueness: true,
             presence: true,
@@ -20,7 +19,7 @@ class User < ApplicationRecord
   end
 
   def self.default_user
-    User.find_or_create_by(email: 'default@flyght.com') do |user|
+    User.find_or_create_by(email: 'default@railsfly.com') do |user|
       user.first_name = 'Default'
       user.last_name = 'User'
       user.password = ENV['default_user_password']

@@ -1,5 +1,5 @@
 class BookingMailer < ApplicationMailer
-  default from: 'bookings@rails-fly.herokuapp.com/'
+  default from: 'rails.fly@gmail.com'
 
   def booking_confirmation(booking)
     @booking = booking
