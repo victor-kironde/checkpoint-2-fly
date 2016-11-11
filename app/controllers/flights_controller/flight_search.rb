@@ -21,16 +21,14 @@ class FlightsController
     end
 
     def check_date(date)
-      begin
-        @date = Time.parse(date)
-        if @date < Time.now
-          @errors << "Date cannot be same as or earlier than current date."
-        elsif @date > Time.now + 1.year
-          @errors << "Date cannot be later than one year from today."
-        end
-      rescue ArgumentError
-        @errors << "Invalid date entered."
+      @date = Time.parse(date)
+      if @date < Time.now
+        @errors << "Date cannot be same as or earlier than current date."
+      elsif @date > Time.now + 1.year
+        @errors << "Date cannot be later than one year from today."
       end
+    rescue ArgumentError
+      @errors << "Invalid date entered."
     end
 
     def get_flights(origin, destination)

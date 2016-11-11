@@ -7,16 +7,16 @@ module Helpers
 
   def login_with(email, password)
     visit login_path
-    fill_in 'email', with: email
-    fill_in 'password', with: password
-    click_on 'Login'
+    fill_in "email", with: email
+    fill_in "password", with: password
+    click_on "Login"
   end
 
   def search_flights(origin, destination, date)
     visit root_path
-    select origin, :from => "originSelect"
-    select destination, :from => "destinationSelect"
-    fill_in 'date', with: date
-    click_button 'search'
+    select origin, from: "originSelect"
+    select destination, from: "destinationSelect"
+    fill_in "date", with: date
+    click_button "search"
   end
 end

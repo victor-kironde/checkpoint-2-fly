@@ -18,11 +18,11 @@ class BookingsController < ApplicationController
     if @booking.save
       BookingMailer.booking_confirmation(@booking).deliver_now
       redirect_to @booking
-       flash[:success] = "Your booking was successfully created."
+      flash[:success] = "Your booking was successfully created."
     else
       params[:passengers] = booking_params[:passengers_attributes].length
       params[:departure] = booking_params[:departure]
-      render 'new'
+      render "new"
     end
   end
 
@@ -40,7 +40,7 @@ class BookingsController < ApplicationController
     else
       params[:passengers] = booking_params[:passengers_attributes].length
       params[:departure] = booking_params[:departure]
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -75,8 +75,9 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking)
-          .permit(:email, :departure, :flight_id, :user_id,
-          passengers_attributes: [:id, :name, :passport_number, :phone, :_destroy])
+    params.require(:booking).
+      permit(:email, :departure, :flight_id, :user_id,
+             passengers_attributes:
+             [:id, :name, :passport_number, :phone, :_destroy])
   end
 end

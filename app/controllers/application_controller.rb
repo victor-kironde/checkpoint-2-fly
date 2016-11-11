@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-    redirect_to('/login') unless current_user
+    redirect_to("/login") unless current_user
   end
 
   def current_user_or_default

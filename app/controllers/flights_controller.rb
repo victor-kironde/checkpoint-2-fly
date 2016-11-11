@@ -1,5 +1,4 @@
 class FlightsController < ApplicationController
-
   def home
     @airports = Airport.get_airports
   end

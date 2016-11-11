@@ -1,82 +1,82 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe SessionsController, type: :controller do
   subject(:user) { create(:user) }
 
-  describe 'GET #new' do
+  describe "GET #new" do
     before(:each) { get :new }
-    it 'returns a status response of 200' do
+    it "returns a status response of 200" do
       expect(response.status).to eq 200
     end
 
-    it 'renders new template' do
+    it "renders new template" do
       expect(response).to render_template(:new)
     end
   end
 
-  describe '#create' do
+  describe "#create" do
     before(:each) do
       post :create, params: {
         session: { email: user.email, password: user.password }
       }
     end
 
-    it 'returns a status code of 302' do
+    it "returns a status code of 302" do
       expect(response.status).to eq 302
     end
 
-    it 'redirects to root path' do
+    it "redirects to root path" do
       expect(response).to redirect_to root_path
     end
 
-    context 'when parameters are valid' do
+    context "when parameters are valid" do
       before(:each) do
         post :create, params: {
           session: { email: user.email, password: user.password }
         }
       end
 
-      it 'sets session id to the user id' do
+      it "sets session id to the user id" do
         expect(session[:user_id]).to eq user.id
       end
 
-      it 'sets the flash accordingly' do
+      it "sets the flash accordingly" do
         expect(flash[:success]).to eq "Welcome back, #{user.full_name}"
       end
     end
 
-    context 'when parameters are invalid' do
+    context "when parameters are invalid" do
       before(:each) do
         post :create, params: {
           session: { email: Faker::Internet.email, password: user.password }
         }
       end
 
-      it 'sets the flash accordingly' do
-        expect(flash[:danger]).to eq 'Incorrect email or password.'
+      it "sets the flash accordingly" do
+        expect(flash[:danger]).to eq "Incorrect email or password."
       end
     end
   end
 
-  describe '#destroy' do
+  describe "#destroy" do
     before(:each) do
       stub_current_user(user)
       delete :destroy
     end
 
-    it 'deletes the session' do
+    it "deletes the session" do
       expect(session[:user_id]).to be_nil
     end
 
-    it 'returns a status code of 302' do
+    it "returns a status code of 302" do
       expect(response.status).to eq 302
     end
 
-    it 'sets the flash' do
+    it "sets the flash" do
       expect(flash[:success]).to eq "You have successfully Logged out"
     end
 
-    it 'redirects to root path' do
+    it "redirects to root path" do
       expect(response).to redirect_to root_path
     end
   end
