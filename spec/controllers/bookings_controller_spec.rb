@@ -111,6 +111,7 @@ RSpec.describe BookingsController, type: :controller do
       end
     end
   end
+
   describe "GET #show" do
     before(:each) { get :show, params: { id: booking.id } }
 

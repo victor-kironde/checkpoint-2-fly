@@ -1,4 +1,5 @@
 require "csv"
+
 CSV.foreach("#{Rails.root}/lib/seeds/airports.csv",
             headers: true,
             header_converters: :symbol) do |row|
