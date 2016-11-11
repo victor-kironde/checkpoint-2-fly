@@ -17,7 +17,7 @@
 				<span class="input-group-addon">
 					<i class="fa fa-plane" aria-hidden="true"></i>
 				</span>
-				<%= select_tag(:origin, options_from_collection_for_select(@airports, :code, :formatted), class: "form-control", placeholder: "origin", id: "origin") %>
+				<%= select_tag(:origin, options_from_collection_for_select(@airports, :code, :formatted), class: "form-control", placeholder: "origin", id: "originSelect") %>
 			</div>
 		</div>
 	</div>
@@ -31,7 +31,7 @@
 				<span class="input-group-addon">
 					<i class="fa fa-home fa" aria-hidden="true"></i>
 				</span>
-				<%= select_tag(:destination, options_from_collection_for_select(@airports, :code, :formatted), class: "form-control", placeholder: "destination", id: "origin", :prompt => "All") %>
+				<%= select_tag(:destination, options_from_collection_for_select(@airports, :code, :formatted), class: "form-control", placeholder: "destination", id: "destinationSelect", :prompt => "All") %>
 			</div>
 		</div>
 	</div>
