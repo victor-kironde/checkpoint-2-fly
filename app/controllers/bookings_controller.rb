@@ -31,7 +31,6 @@ class BookingsController < ApplicationController
   end
 
   def edit
-    @booking = Booking.find(params[:id])
   end
 
   def update
@@ -47,7 +46,6 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-    @booking = Booking.find(params[:id])
     @booking.destroy
     flash[:success] = booking_deleted
     redirect_to bookings_user_path(current_user)
