@@ -14,14 +14,8 @@ module Helpers
 
   def search_flights(origin, destination, date)
     visit root_path
-    find_all('div.select-wrapper input').first.click
-    find('div.select-wrapper li', text: origin).click
-    page.execute_script 'window.scrollBy(0,-10000)'
-    find_all('div.select-wrapper input')[1].click
-    find('div.select-wrapper li', text: destination).click
-    page.execute_script 'window.scrollBy(0,-10000)'
-    find_all('div.select-wrapper input')[2].click
-    find('div.select-wrapper li', text: '1').click
+    select origin, :from => "originSelect"
+    select destination, :from => "destinationSelect"
     fill_in 'date', with: date
     click_button 'search'
   end

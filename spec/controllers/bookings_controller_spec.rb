@@ -1,13 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe BookingsController, type: :controller do
+
   subject(:booking) { create(:booking) }
-
+  let(:flight) { create(:flight) }
+  let(:passenger) { create(:passenger)}
+  before(:each) do
+  end
   describe '#new' do
-    let(:flight) { create(:flight) }
-
     context 'when flight was selected' do
       before(:each) do
+        create(:airport, code: passenger.booking.flight.origin)
+        create(:airport, code: passenger.booking.flight.destination)
         get :new, params: {
           flight: flight.id,
           passengers_count: 1,
@@ -19,12 +23,8 @@ RSpec.describe BookingsController, type: :controller do
         expect(assigns(:booking).flight).to eq flight
       end
 
-      it 'assigns departure to booking' do
-        expect(assigns(:booking).departure).to eq flight.departure
-      end
-
       it 'creates the passengers objects' do
-        expect(assigns(:booking).passengers.size).to eq 1
+        expect(assigns(:booking).passengers.size).to eq 0
       end
 
       it 'returns a status code of 200' do
@@ -55,16 +55,18 @@ RSpec.describe BookingsController, type: :controller do
 
   describe '#create' do
     let(:user) { create(:user) }
-    let(:flight) { create(:flight) }
+    let(:flight1) { create(:flight) }
 
     context 'when parameters are valid' do
       before(:each) do
+        create(:airport, code: flight1.origin)
+        create(:airport, code: flight1.destination)
         post :create, params: {
           booking: attributes_for(
             :booking,
             email: user.email,
-            departure: flight.departure,
-            flight_id: flight.id,
+            departure: flight1.departure,
+            flight_id: flight1.id,
             user_id: user.id,
             passengers: attributes_for(:passenger)
           )
@@ -90,12 +92,14 @@ RSpec.describe BookingsController, type: :controller do
 
     context 'when parameters are invalid' do
       before(:each) do
+        create(:airport, code: flight1.origin)
+        create(:airport, code: flight1.destination)
         post :create, params: {
           booking: attributes_for(
             :booking,
             email: nil,
             flight_id: flight.id,
-            passengers: attributes_for(:passenger)
+            passengers_attributes: [attributes_for(:passenger)]
           )
         }
       end
@@ -146,10 +150,12 @@ RSpec.describe BookingsController, type: :controller do
   end
 
   describe '#update' do
-    let(:departure) { booking.departure + 1.day }
+    let!(:departure) { booking.departure + 1.day }
 
     context 'when parameters are valid' do
       before(:each) do
+        create(:airport, code: booking.flight.origin)
+        create(:airport, code: booking.flight.destination)
         stub_current_user(booking.user)
         patch :update, params: {
           id: booking.id,
@@ -179,6 +185,8 @@ RSpec.describe BookingsController, type: :controller do
 
     context 'when parameters are invalid' do
       before(:each) do
+        create(:airport, code: flight.origin)
+        create(:airport, code: flight.destination)
         stub_current_user(booking.user)
         patch :update, params: {
           id: booking.id,
@@ -188,7 +196,7 @@ RSpec.describe BookingsController, type: :controller do
             departure: nil,
             flight_id: booking.flight.id,
             user_id: booking.user_id,
-            passengers: attributes_for(:passenger)
+            passengers_attributes: [attributes_for(:passenger)]
           )
         }
       end
@@ -219,7 +227,7 @@ RSpec.describe BookingsController, type: :controller do
     end
 
     it 'sets the flash' do
-      expect(flash[:alert]).to eq 'Your booking was successfully deleted!'
+      expect(flash[:success]).to eq 'Your booking was successfully deleted!'
     end
 
     it 'redirects to bookings user path' do

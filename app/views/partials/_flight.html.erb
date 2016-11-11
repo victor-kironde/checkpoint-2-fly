@@ -1,5 +1,5 @@
 <tr>
-  <td><input name="flight" value=<%= @flight.id %> type="radio" id=<%= @flight.id %>/></td>
+  <td><input name="flight" value=<%= @flight.id %> type="radio" id=<%= @flight.id %>></td>
   <td><%= @flight.origin_airport.city %></td>
   <td><%= @flight.destination_airport.city %></td>
   <td><%= @flight.departure.strftime "%H:%M" %> | <%= @date.strftime "%Y-%m-%d" %></td>

@@ -1,10 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Sign Up', js: true do
-  before(:all) do
-    @user = build(:user)
-    @registered = create(:user)
-  end
+  let(:user_registered) { create(:user) }
+  let(:user) { build(:user) }
 
   scenario 'User clicks on Register' do
     visit root_path
@@ -16,15 +14,15 @@ RSpec.feature 'Sign Up', js: true do
   end
 
   scenario 'User signs up with valid Credentials' do
-    signup(@user.first_name, @user.last_name, @user.email, @user.password,
-           @user.password_confirmation)
+    signup(user.first_name, user.last_name, user.email, user.password,
+           user.password_confirmation)
     expect(page).to have_content('Log Out')
-    expect(page).to have_content("Welcome #{@user.first_name}")
+    expect(page).to have_content("Welcome #{user.first_name}")
   end
 
   scenario 'User enters a used email' do
-    signup(@user.first_name, @user.last_name, @registered.email, @user.password,
-           @user.password_confirmation)
+    signup(user.first_name, user.last_name, user_registered.email, user.password,
+           user.password_confirmation)
     expect(page).to have_content('Email has already been taken')
   end
 

@@ -29,7 +29,7 @@ RSpec.describe FlightsController, type: :controller do
         date: flight.departure
       }, format: :js
     end
-    
+
     it 'returns a status code of 200' do
       expect(response.status).to eq 200
     end
