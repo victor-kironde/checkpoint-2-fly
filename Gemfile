@@ -20,6 +20,7 @@ group :test do
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 group :development, :test do
   gem 'byebug', platform: :mri

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Booking', js: true do
-  before(:all) do
+  before(:each) do
     @user = create(:user)
     @origin = create(:airport)
     @destination = create(:airport)
@@ -19,38 +19,33 @@ RSpec.feature 'Booking', js: true do
 
   scenario 'User completes a full booking process' do
     search_to_book
-    fill_in_booking_details(@user.email, @user.full_name, 23, 'B1234', '421528')
+    fill_in_booking_details(@user.email, @user.full_name, 'B1234', '421528')
     expect(page).to have_content('Your booking was successfully created.')
   end
 
-  scenario 'User completes a full booking process with invalid data' do
+  scenario 'User fills in no data' do
     search_to_book
-    fill_in_booking_details('', '', '', '', '')
-    expect(page).to have_content('6 errors found:')
+    fill_in_booking_details('', '', '', '')
+    expect(page).to have_content('errors found')
     expect(page).to have_content("Passengers name can't be blank")
-    expect(page).to have_content("Passengers passport can't be blank")
-    expect(page).to have_content("Passengers age can't be blank")
-    expect(page).to have_content('Passengers age is not a number')
-    expect(page).to have_content("Email can't be blank")
-    expect(page).to have_content('Email is invalid')
+    expect(page).to have_content("Passengers passport number can't be blank")
   end
 
   scenario 'Registered user completes a full booking process' do
     login_with(@user.email, @user.password)
     search_to_book
-    fill_in_booking_details(nil, @user.full_name, 23, 'B1234', '421528')
+    fill_in_booking_details(nil, @user.full_name, 'B1234', '421528')
     visit(bookings_user_path(@user))
-    expect(page).to have_content('Here are your past bookings')
+    expect(page).to have_content('CANCEL BOOKING')
     expect(page).to have_content(@flight.origin_airport.name)
     expect(page).to have_content(@flight.destination_airport.name)
   end
 
-  def fill_in_booking_details(email, name, age, passport, phone)
-    fill_in 'booking_email', with: email if email
-    fill_in 'booking_passengers_attributes_0_name', with: name
-    fill_in 'booking_passengers_attributes_0_age', with: age
-    fill_in 'booking_passengers_attributes_0_passport', with: passport
-    fill_in 'booking_passengers_attributes_0_phone', with: phone
+  def fill_in_booking_details(email, name, passport, phone)
+    fill_in 'email', with: email if email
+    fill_in 'name', with: name
+    fill_in 'p_number', with: passport
+    fill_in 'phone', with: phone
     click_on('search')
   end
 

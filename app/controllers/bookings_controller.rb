@@ -1,11 +1,14 @@
 class BookingsController < ApplicationController
+  before_action :find_booking_by_id, only: [:show, :edit, :update, :destroy]
+
   def new
     flight = Flight.find_by id: params[:flight]
     if flight
       @booking = flight.bookings.new
       params[:passengers].to_i.times { @booking.passengers.build }
     else
-      redirect_to root_path, alert: "No flight was selected."
+      flash[:danger] = "No flight was selected."
+      redirect_to root_path
     end
   end
 
@@ -14,7 +17,8 @@ class BookingsController < ApplicationController
     @booking = flight.bookings.new(booking_params)
     if @booking.save
       BookingMailer.booking_confirmation(@booking).deliver_now
-      redirect_to @booking, alert: "Booking successfully created."
+      redirect_to @booking
+       flash[:success] = "Your booking was successfully created."
     else
       params[:passengers] = booking_params[:passengers_attributes].length
       params[:departure] = booking_params[:departure]
@@ -23,18 +27,16 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = Booking.find(params[:id])
   end
 
   def edit
-    @booking = Booking.find(params[:id])
   end
 
   def update
-    @booking = Booking.find(params[:id])
     if @booking.update(booking_params)
       BookingMailer.booking_confirmation(@booking).deliver_now
-      redirect_to @booking, alert: "Booking updated successfully."
+      flash[:success] = "Your booking was successfully updated."
+      redirect_to @booking
     else
       params[:passengers] = booking_params[:passengers_attributes].length
       params[:departure] = booking_params[:departure]
@@ -43,9 +45,9 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-    @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_to bookings_user_path(current_user), alert: "Booking deleted!"
+    flash[:success] = "Your booking was successfully deleted!"
+    redirect_to bookings_user_path(current_user)
   end
 
   def manage
@@ -63,6 +65,10 @@ class BookingsController < ApplicationController
   end
 
   private
+
+  def find_booking_by_id
+    @booking = Booking.find(params[:id])
+  end
 
   def can_edit(booking)
     current_user && current_user.email == booking.email
