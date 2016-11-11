@@ -19,11 +19,11 @@ class User < ApplicationRecord
   end
 
   def self.default_user
-    User.find_or_create_by(email: 'default@railsfly.com') do |user|
-      user.first_name = 'Default'
-      user.last_name = 'User'
-      user.password = ENV['default_user_password']
-      user.password_confirmation = ENV['default_user_password']
+    User.find_or_create_by(email: "default@railsfly.com") do |user|
+      user.first_name = "Default"
+      user.last_name = "User"
+      user.password = ENV["default_user_password"]
+      user.password_confirmation = ENV["default_user_password"]
     end
   end
 end

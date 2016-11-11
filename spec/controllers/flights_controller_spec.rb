@@ -1,24 +1,24 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe FlightsController, type: :controller do
-  describe '#home' do
+  describe "#home" do
     before(:each) { get :home }
 
-    it 'assigns airports' do
+    it "assigns airports" do
       create(:airport)
       expect(assigns(:airports)).to eq Airport.get_airports
     end
 
-    it 'returns a status code of 200' do
+    it "returns a status code of 200" do
       expect(response.status).to eq 200
     end
 
-    it 'renders the home template' do
-      expect(response).to render_template('home')
+    it "renders the home template" do
+      expect(response).to render_template("home")
     end
   end
 
-  describe '#index' do
+  describe "#index" do
     subject(:flight) { create(:flight) }
 
     before(:each) do
@@ -30,12 +30,12 @@ RSpec.describe FlightsController, type: :controller do
       }, format: :js
     end
 
-    it 'returns a status code of 200' do
+    it "returns a status code of 200" do
       expect(response.status).to eq 200
     end
 
-    it 'renders the index template' do
-      expect(response).to render_template('index')
+    it "renders the index template" do
+      expect(response).to render_template("index")
     end
   end
 end

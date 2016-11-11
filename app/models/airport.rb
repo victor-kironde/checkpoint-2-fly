@@ -1,12 +1,11 @@
 class Airport < ApplicationRecord
-  validates :code, :presence => true, :uniqueness => true
+  validates :code, presence: true, uniqueness: true
   validates :name, :city, :country, :latitude,
-    :longitude, :presence => true
-
+            :longitude, presence: true
 
   def self.get_airports
-     self.order(country: :asc,
-      city: :asc, name: :asc, code: :asc)
+    order(country: :asc,
+          city: :asc, name: :asc, code: :asc)
   end
 
   def formatted

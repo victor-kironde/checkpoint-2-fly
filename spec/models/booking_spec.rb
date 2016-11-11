@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Booking, type: :model do
   it { is_expected.to belong_to(:flight) }
@@ -6,8 +6,8 @@ RSpec.describe Booking, type: :model do
   it { is_expected.to have_many(:passengers) }
   it { is_expected.to accept_nested_attributes_for(:passengers) }
 
-  describe 'creation' do
-    it 'sets the reference and price on create' do
+  describe "creation" do
+    it "sets the reference and price on create" do
       booking = FactoryGirl.create(:booking)
 
       expect(booking).to validate_presence_of(:reference)
@@ -16,5 +16,4 @@ RSpec.describe Booking, type: :model do
       expect(booking).to validate_presence_of(:email)
     end
   end
-
 end

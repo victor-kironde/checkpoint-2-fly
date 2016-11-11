@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Airport, type: :model do
   it { is_expected.to validate_presence_of(:code) }
@@ -9,8 +9,8 @@ RSpec.describe Airport, type: :model do
   it { is_expected.to validate_presence_of(:latitude) }
   it { is_expected.to validate_presence_of(:longitude) }
 
-  describe 'formatted' do
-    it 'should return a formatted string fo the airport' do
+  describe "formatted" do
+    it "should return a formatted string fo the airport" do
       port = create(:airport)
       list = "#{port.country} - #{port.city} - #{port.name} (#{port.code})"
 
