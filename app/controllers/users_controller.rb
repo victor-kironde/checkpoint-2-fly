@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       redirect_to root_path
       flash[:success] = "Welcome #{@user.first_name}!"
     else
-      render 'new'
+      render "new"
       flash[:danger] = "Incorrect email or password."
     end
   end
@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :email,
+                                 :password, :password_confirmation)
   end
 end
