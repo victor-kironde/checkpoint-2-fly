@@ -1,5 +1,7 @@
 class BookingsController < ApplicationController
+  before_action :find_booking_by_code, only: [:manage]
   before_action :find_booking_by_id, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:edit, :update, :destroy]
 
   def new
     flight = Flight.find_by id: params[:flight]
@@ -7,7 +9,7 @@ class BookingsController < ApplicationController
       @booking = flight.bookings.new
       params[:passengers].to_i.times { @booking.passengers.build }
     else
-      flash[:danger] = "No flight was selected."
+      flash[:danger] = no_flight_selected
       redirect_to root_path
     end
   end
@@ -18,7 +20,7 @@ class BookingsController < ApplicationController
     if @booking.save
       BookingMailer.booking_confirmation(@booking).deliver_now
       redirect_to @booking
-      flash[:success] = "Your booking was successfully created."
+      flash[:success] = booking_saved
     else
       params[:passengers] = booking_params[:passengers_attributes].length
       params[:departure] = booking_params[:departure]
@@ -35,7 +37,7 @@ class BookingsController < ApplicationController
   def update
     if @booking.update(booking_params)
       BookingMailer.booking_confirmation(@booking).deliver_now
-      flash[:success] = "Your booking was successfully updated."
+      flash[:success] = booking_updated
       redirect_to @booking
     else
       params[:passengers] = booking_params[:passengers_attributes].length
@@ -46,7 +48,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking.destroy
-    flash[:success] = "Your booking was successfully deleted!"
+    flash[:success] = booking_deleted
     redirect_to bookings_user_path(current_user)
   end
 
@@ -54,13 +56,16 @@ class BookingsController < ApplicationController
     @booking = Booking.find_by reference: params[:ref].strip
     if @booking
       if can_edit(@booking)
-        redirect_to edit_booking_path(@booking), alert: "Booking found."
+        redirect_to edit_booking_path(@booking)
+        flash[:success] = booking_found
       else
-        redirect_to @booking, alert: "Booking found."
+        redirect_to @booking
+        flash[:success] = booking_found
       end
+
     else
       redirect_to find_bookings_path
-      flash[:danger] = "Booking does not exist."
+      flash[:danger] = booking_not_found
     end
   end
 
@@ -68,6 +73,11 @@ class BookingsController < ApplicationController
 
   def find_booking_by_id
     @booking = Booking.find(params[:id])
+  end
+
+  def find_booking_by_code
+    @booking = Booking.find_by(reference: params[:ref].strip)
+    @booking || flash[:danger] = booking_not_found
   end
 
   def can_edit(booking)

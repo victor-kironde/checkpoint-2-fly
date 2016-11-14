@@ -13,8 +13,8 @@ class Booking < ApplicationRecord
   before_create :generate_reference, :set_price
 
   def generate_reference
-    self.reference = "#{SecureRandom.hex(3)}
-                     /#{flight.id}/#{flight.number}".upcase
+    self.reference = "#{SecureRandom.hex(3)}"\
+                     "/#{flight.id}/#{flight.number}".upcase
   end
 
   def set_price

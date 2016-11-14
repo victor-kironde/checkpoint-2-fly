@@ -1,9 +1,9 @@
 $('#results').empty()
-<% if @search.errors.any? %>
-  <% @search.errors.each do |error| %>
-    <%= j(flash[:danger] = error) %>
-  <% end %>
-<% else %>
+<% errors = check_search(params[:origin], params[:destination], params[:date]) %>
+<%if errors.any? %>
+  $('#search-errors')
+    .html("<%= j(render partial: 'partials/search_errors', locals: { errors: errors } ) %>");
+  <% else %>
   $('#results')
-    .html("<%= j(render partial: 'partials/flight_results', locals: { search: @search } ) %>");
+    .html("<%= j(render partial: 'partials/flight_results', locals: { flights: @flights}) %>");
 <% end %>

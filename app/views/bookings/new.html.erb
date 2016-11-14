@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="row main">
 		<%= render 'partials/errors', obj: @booking %>
 		<div class="panel-heading">
@@ -9,16 +9,10 @@
 		</div>
 		<div class="main-login main-center">
       <%= form_for @booking do |f| %>
-
     <p>Total price for
       <%= params[:passengers] %> passenger(s): <%= total_booking_cost(@booking.flight, params[:passengers]) %> USD</p>
-
-    <% @flight = @booking.flight %>
-    <% @date = Time.parse(params[:departure]) %>
-
-
-    <div class="jumbotron">
-      <%= render partial: "partials/flight" %>
+    <div class="panel">
+      <%= render partial: "partials/flight", locals: { flight: @booking.flight, date: Time.parse(params[:departure]) } %>
     </div>
 
 
@@ -38,10 +32,7 @@
 			</div>
       <%= hidden_field_tag "booking[departure]", params[:departure] %>
       <%= hidden_field_tag "booking[flight_id]", @booking.flight.id %>
-      <% if current_user %>
-        <%= hidden_field_tag "booking[user_id]", current_user.id %>
-      <% end %>
-
+      <%= hidden_field_tag "booking[user_id]", current_user_or_default.id %>
         <% counter = 1 %>
         <%= f.fields_for :passengers do |passengers_form| %>
         <p><b>Passenger <%="#{counter}"%></b></p>

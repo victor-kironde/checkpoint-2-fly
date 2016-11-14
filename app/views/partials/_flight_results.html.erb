@@ -1,8 +1,8 @@
+
 <%= form_tag new_booking_path, class: "row",
   method: 'get', id: "flight_view" do %>
-<% @date = @search.date %>
-<div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
+<!-- <div class="tbl-header"> -->
+    <table class="table">
         <thead>
             <tr>
                 <th>Select</th>
@@ -18,14 +18,15 @@
     </table>
 </div>
 <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
+  <table cellpadding="0" cellspacing="0" border="0">
         <tbody>
-            <% @search.flights.each do |flight| %>
-            <% @flight = flight %>
-            <%= render partial: "partials/flight", locals:{} %>
+            <tr>
+            <% flights.each do |flight| %>
+            <td><input name="flight" value=<%= flight.id %> type="radio" id=<%= flight.id %>></td>
+            <%= render partial: "partials/flight", locals: { flight: flight, date: Time.parse(params[:date]) } %>
             <% end %>
-            <%= hidden_field_tag "passengers", @search.passengers %>
-            <%= hidden_field_tag "departure", @search.date.strftime("%Y-%m-%d") %>
+            <%= hidden_field_tag "passengers", params[:passengers] %>
+            <%= hidden_field_tag "departure", params[:date] %>
             <% end %>
         </tbody>
     </table>
