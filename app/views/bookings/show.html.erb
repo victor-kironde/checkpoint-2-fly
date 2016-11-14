@@ -1,16 +1,14 @@
 <p id="notice"><%= notice %></p>
 <div class="container-fluid">
   <div class="row">
-    <% @flight = @booking.flight %>
-    <% @date = @booking.departure %>
     <div class="jumbotron">
       <h2 align='center'>Booking Details</h2>
     <table>
-      <tbody>
-      <%= render partial: "partials/flight" %>
-    </tbody>
+      <thead>
+      <%= render partial: "partials/flight", locals: { flight: @booking.flight, date: @booking.departure } %>
+    </thead>
   </table>
-
+  <hr>
       <table>
         <thead>
           <tr>

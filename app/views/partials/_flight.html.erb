@@ -1,10 +1,8 @@
-<tr>
-  <td><input name="flight" value=<%= @flight.id %> type="radio" id=<%= @flight.id %>></td>
-  <td><%= @flight.origin_airport.city %></td>
-  <td><%= @flight.destination_airport.city %></td>
-  <td><%= @flight.departure.strftime "%H:%M" %> | <%= @date.strftime "%Y-%m-%d" %></td>
-  <td><%= @flight.airline.name %></td>
-  <td><%= @flight.number %></td>
-  <td><%= @flight.arrival_date(@date).strftime "%H:%M" %></td>
-  <td><%= "#{@flight.price} USD" %></td>
+  <td><%= flight.origin_airport.city %></td>
+  <td><%= flight.destination_airport.city %></td>
+  <td><%= flight.departure.strftime "%H:%M" %> | <%= date.strftime "%Y-%m-%d" %></td>
+  <td><%= flight.airline.name %></td>
+  <td><%= flight.number %></td>
+  <td><%= flight.arrival_date(date) %></td>
+  <td><%= "#{flight.price} USD" %></td>
 </tr>
