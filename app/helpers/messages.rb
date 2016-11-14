@@ -11,12 +11,8 @@ module Messages
     "Incorrect email or password."
   end
 
-  def log_out_goodbye(name)
-    "GoodBye, #{name}"
-  end
-
-  def not_logged_in
-    "Please sign up or log in to access this page."
+  def log_out_success
+    "You have successfully Logged out"
   end
 
   def invalid_route
@@ -27,22 +23,10 @@ module Messages
     "Date cannot be same as or earlier than current date."
   end
 
-  def invalid_date_late
-    "Date cannot be later than one year from today."
-  end
-
   def invalid_date_format
     "Invalid date entered."
   end
-
-  def flights_found(num)
-    "#{pluralize(num, 'flight')} found"
-  end
-
-  def no_flights_found
-    "There are no flights available for this route"
-  end
-
+  
   def no_flight_selected
     "No flight was selected."
   end
@@ -64,6 +48,6 @@ module Messages
   end
 
   def booking_not_found
-    "Booking was not found."
+    "Booking does not exist."
   end
 end

@@ -9,10 +9,9 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_path
-      flash[:success] = "Welcome #{@user.first_name}!"
+      flash[:success] = sign_up_welcome(@user)
     else
       render "new"
-      flash[:danger] = "Incorrect email or password."
     end
   end
 
