@@ -7,7 +7,7 @@ RSpec.feature "Sign Up", js: true do
   scenario "User clicks on Register" do
     visit root_path
     click_on "Sign Up"
-    expect(page).to have_content("SIGN UP")
+    expect(page).to have_content("Sign Up")
     expect(page).to have_content("First name")
     expect(page).to have_content("Last name")
     expect(page).to have_content("Email")
