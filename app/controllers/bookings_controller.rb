@@ -53,11 +53,9 @@ class BookingsController < ApplicationController
   end
 
   def manage
-    @booking = Booking.find_by reference: params[:ref].strip
     if @booking
       if can_edit(@booking)
         redirect_to edit_booking_path(@booking)
-        flash[:success] = booking_found
       else
         redirect_to @booking
         flash[:success] = booking_found
@@ -88,6 +86,6 @@ class BookingsController < ApplicationController
     params.require(:booking).
       permit(:email, :departure, :flight_id, :user_id,
              passengers_attributes:
-             [:id, :name, :passport_number, :phone, :_destroy])
+             [:id, :name, :passport_number, :phone])
   end
 end
