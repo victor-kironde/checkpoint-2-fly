@@ -248,7 +248,7 @@ RSpec.describe BookingsController, type: :controller do
     end
 
     it "sets the flash" do
-      expect(flash[:alert]).to eq "Booking found."
+      expect(flash[:success]).to eq "Booking found."
     end
 
     context "when user is anonymous" do
