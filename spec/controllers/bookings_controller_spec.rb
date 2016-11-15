@@ -4,9 +4,8 @@ RSpec.describe BookingsController, type: :controller do
   subject(:booking) { create(:booking) }
   let(:flight) { create(:flight) }
   let(:passenger) { create(:passenger) }
-  before(:each) do
-  end
-  describe "#new" do
+
+  describe "GET #new" do
     context "when flight was selected" do
       before(:each) do
         create(:airport, code: passenger.booking.flight.origin)
@@ -52,7 +51,7 @@ RSpec.describe BookingsController, type: :controller do
     end
   end
 
-  describe "#create" do
+  describe "POST #create" do
     let(:user) { create(:user) }
     let(:flight1) { create(:flight) }
 
@@ -113,7 +112,7 @@ RSpec.describe BookingsController, type: :controller do
     end
   end
 
-  describe "#show" do
+  describe "GET #show" do
     before(:each) { get :show, params: { id: booking.id } }
 
     it "assigns a booking object" do
@@ -129,7 +128,7 @@ RSpec.describe BookingsController, type: :controller do
     end
   end
 
-  describe "#edit" do
+  describe "GET #edit" do
     before(:each) do
       stub_current_user(booking.user)
       get :edit, params: { id: booking.id }
@@ -148,7 +147,7 @@ RSpec.describe BookingsController, type: :controller do
     end
   end
 
-  describe "#update" do
+  describe "PATCH #update" do
     let!(:departure) { booking.departure + 1.day }
 
     context "when parameters are valid" do
@@ -210,7 +209,7 @@ RSpec.describe BookingsController, type: :controller do
     end
   end
 
-  describe "#destroy" do
+  describe "DELETE #destroy" do
     let(:user) { booking.user }
     before(:each) do
       stub_current_user(user)
@@ -234,7 +233,7 @@ RSpec.describe BookingsController, type: :controller do
     end
   end
 
-  describe "#manage" do
+  describe "GET #manage" do
     before(:each) do
       get :manage, params: { ref: booking.reference }
     end

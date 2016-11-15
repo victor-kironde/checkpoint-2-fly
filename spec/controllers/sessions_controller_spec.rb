@@ -14,7 +14,7 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
-  describe "#create" do
+  describe "POST #create" do
     before(:each) do
       post :create, params: {
         session: { email: user.email, password: user.password }
@@ -58,7 +58,7 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
-  describe "#destroy" do
+  describe "DELETE #destroy" do
     before(:each) do
       stub_current_user(user)
       delete :destroy
