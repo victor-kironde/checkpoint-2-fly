@@ -9,7 +9,6 @@ RSpec.describe Booking, type: :model do
   describe "Create Booking" do
     it "sets the reference and price on create" do
       booking = create(:booking)
-
       expect(booking).to validate_presence_of(:reference)
       expect(booking).to validate_presence_of(:price)
       expect(booking).to validate_presence_of(:departure)

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe FlightsController, type: :controller do
-  describe "#home" do
+  describe "GET #home" do
     before(:each) { get :home }
 
     it "assigns airports" do
@@ -18,7 +18,7 @@ RSpec.describe FlightsController, type: :controller do
     end
   end
 
-  describe "#index" do
+  describe "GET #index" do
     subject(:flight) { create(:flight) }
 
     before(:each) do

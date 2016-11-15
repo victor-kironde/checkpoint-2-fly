@@ -74,7 +74,7 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe "#bookings" do
+  describe "GET #bookings" do
     let(:user) { create(:user) }
 
     before(:each) do
@@ -86,7 +86,7 @@ RSpec.describe UsersController, type: :controller do
       expect(assigns(:bookings)).to eq user.bookings
     end
 
-    it "returns a status code of 200" do
+    it "returns Xa status code of 200" do
       expect(response.status).to eq 200
     end
 
