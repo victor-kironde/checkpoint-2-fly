@@ -23,9 +23,12 @@ class Flight < ApplicationRecord
   end
 
   def departure_date(date)
-    departure.change(year: date.year,
-                     month: date.month,
-                     day: date.day)
+    departure.
+      change(
+        year: date.year,
+        month: date.month,
+        day: date.day
+      )
   end
 
   def arrival_date(date)
