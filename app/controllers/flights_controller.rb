@@ -4,10 +4,6 @@ class FlightsController < ApplicationController
   end
 
   def index
-    origin = params[:origin]
-    destination = params[:destination]
-    passengers = params[:passengers]
-    date = params[:date]
     @flights = Flight.path(params[:origin], params[:destination])
     respond_to do |format|
       format.js {}
