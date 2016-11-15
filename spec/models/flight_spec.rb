@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Flight, type: :model do
-  let(:flight) { FactoryGirl.create(:flight) }
   it { is_expected.to validate_presence_of(:origin) }
   it { is_expected.to validate_presence_of(:destination) }
   it { is_expected.to validate_presence_of(:departure) }
