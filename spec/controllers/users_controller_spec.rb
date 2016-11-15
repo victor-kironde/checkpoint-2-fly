@@ -53,7 +53,7 @@ RSpec.describe UsersController, type: :controller do
 
       it "sets flash with welcome message" do
         user_create_request
-        expect(flash[:success]).to eq "Welcome Victor!"
+        expect(flash[:success]).to eq "Welcome Victor Kironde"
       end
     end
 
