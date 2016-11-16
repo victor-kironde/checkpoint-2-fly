@@ -1,3 +1,0 @@
-test:
-  override:
-    - COVERALLS_REPO_TOKEN=$Coveralls_token bundle exec rspec spec
