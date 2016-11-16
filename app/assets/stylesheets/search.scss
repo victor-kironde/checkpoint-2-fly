@@ -1,0 +1,9 @@
+.form-div {
+    display: flex;
+    align-items: flex-end;
+    margin: 3% 0;
+    .form-div-element {
+      flex-grow: 1;
+        margin-right: 1%;
+    }
+}

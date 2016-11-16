@@ -1,15 +1,32 @@
 <p id="notice"><%= notice %></p>
-<div class="container-fluid">
   <div class="row">
-    <div class="jumbotron">
-      <h2 align='center'>Booking Details</h2>
-    <table>
-      <thead>
-      <%= render partial: "partials/flight", locals: { flight: @booking.flight, date: @booking.departure } %>
+      <h1>Booking Details</h1>
+      <section class="panel">
+        <header class="panel-heading">
+          <h2 class="panel-title">Flight Details</h2>
+        </header>
+        <div class="panel-body">
+          <div class="table-responsive">
+    <table class="table table-bordered mb-none">
+      <thead class="info">
+        <th >
+        <%=@booking.flight.airline.name %>
+      </th>
+        <th>
+          <%= @booking.flight.departure.strftime "%Y-%m-%d" %>
+        </th>
     </thead>
   </table>
-  <hr>
-      <table>
+</div>
+</div>
+</section>
+  <section class="panel">
+    <header class="panel-heading">
+      <h2 class="panel-title">Booking Details</h2>
+    </header>
+    <div class="panel-body">
+      <div class="table-responsive">
+      <table class="table table-bordered mb-none">
         <thead>
           <tr>
             <th data-field="Confirmation">Confirmation</th>
@@ -18,17 +35,24 @@
           </tr>
         </thead>
         <tbody>
-          <% @booking.passengers.each do |passenger| %>
+
             <tr>
               <td><%= @booking.reference %></td>
               <td><%= @booking.updated_at.strftime '%Y-%m-%d %H:%M' %></td>
               <td><%= @booking.price %> USD</td>
             </tr>
-          <% end %>
         </tbody>
       </table>
-    <h2 align='center'>Passengers</h2>
-    <table>
+    </div>
+  </div>
+</section>
+    <section class="panel">
+      <header class="panel-heading">
+        <h2 class="panel-title">Passengers</h2>
+      </header>
+      <div class="panel-body">
+        <div class="table-responsive">
+    <table class="table table-bordered mb-none">
       <thead>
         <tr>
           <th data-field="name">NAME</th>
@@ -47,5 +71,6 @@
       </tbody>
     </table>
   </div>
-  </div>
 </div>
+</section>
+  </div>

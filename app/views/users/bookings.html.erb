@@ -1,10 +1,14 @@
-<div class="container">
-  <div class="row">
-
+<div class="row">
     <% if @bookings.empty? %>
       <% flash.now[:danger] = "You have no past bookings."%>
     <% else %>
-    <table>
+    <section class="panel">
+      <header class="panel-heading">
+        <h2 class="panel-title">Past Bookings</h2>
+      </header>
+      <div class="panel-body">
+        <div class="table-responsive">
+    <table class="table table-bordered mb-none">
       <thead>
         <tr>
           <th data-field="origin">ORIGIN</th>
@@ -25,12 +29,12 @@
             <td><%= booking.departure.strftime '%Y-%m-%d' %></td>
             <td><%= "#{booking.price} USD" %></td>
             <td><%= booking.updated_at.strftime '%Y-%m-%d %H:%M' %></td>
-            <td><%= link_to "View", booking %></td>
-            <td><%= link_to "Edit", edit_booking_path(booking) %></td>
+            <td class="info"><%= link_to "View", booking %></td>
+            <td class="primary"><%= link_to "Edit", edit_booking_path(booking) %></td>
             <% if booking.expired? %>
-              <td>EXPIRED</td>
+              <td class="danger">EXPIRED</td>
             <% else %>
-              <td><%= link_to "Cancel", booking_path(booking), method: :delete, data: { confirm: "Are you sure you want to cancel this boooking?" }%></td>
+              <td class="warning"><%= link_to "Cancel", booking_path(booking), method: :delete, data: { confirm: "Are you sure you want to cancel this boooking?" }%></td>
             <% end %>
           </tr>
         <% end %>
@@ -39,4 +43,3 @@
 
     <% end %>
   </div>
-</div>

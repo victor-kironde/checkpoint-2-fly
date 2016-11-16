@@ -1,21 +1,18 @@
 <% if obj.errors.any? %>
+
 <div class="row">
   <div class="col-xs-8 col-xs-offset-2">
-    <div class="panel panel-danger">
-      <div class="panel-heading">
+    <div class="alert alert-danger">
         <a href="#" class="close" data-dismiss="panel" aria-label="close">&times;</a>
         <h2 class="panel-title">
           <%= pluralize(obj.errors.count, "errors found") %>
         </h2>
-        <div class="panel-body">
           <ul>
             <% obj.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
             <% end %>
           </ul>
-        </div>
-      </div>
-    </div>
   </div>
+</div>
 </div>
 <% end %>

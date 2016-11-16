@@ -1,21 +1,23 @@
 
-  <%= form_tag flights_path, method: 'get', remote: true do %>
-
+  <%= form_tag flights_path, method: 'get', class: "form-div",  remote: true do %>
+      <div class="form-div-element">
 		<%= label_tag("Origin") %>
 
-				<%= select_tag(:origin, options_from_collection_for_select(@airports, :code, :formatted), class: "form-control", placeholder: "origin", id: "originSelect") %>
+				<%= select_tag(:origin, options_from_collection_for_select(@airports, :code, :formatted), class: "form-control", placeholder: "origin", id: "originSelect") %></div>
 
-		<%= label_tag("Destination") %>
+		<div class="form-div-element">
+    <%= label_tag("Destination") %>
 
-				<%= select_tag(:destination, options_from_collection_for_select(@airports, :code, :formatted), class: "form-control", placeholder: "destination", id: "destinationSelect", :prompt => "All") %>
+				<%= select_tag(:destination, options_from_collection_for_select(@airports, :code, :formatted), class: "form-control", placeholder: "destination", id: "destinationSelect", :prompt => "All") %></div>
 
-		<%= label_tag("Passengers") %>
+		<div class="form-div-element">
+    <%= label_tag("Passengers") %>
 
-				<%= select_tag(:passengers, options_for_select((1..10).to_a), class: "form-control") %>
+				<%= select_tag(:passengers, options_for_select((1..10).to_a), class: "form-control") %></div>
 
-		<%= label_tag("Date") %>
-			<input type="date" id = "date" name="date" class="datepicker form-control">
-			<br>
+    <div class="form-div-element">
+    <%= label_tag("Date") %>
+			<input type="date" id = "date" name="date" class="datepicker form-control"></div>
       <button id="search" class="btn btn-success" type="submit">Search
       </button>
   <% end %>

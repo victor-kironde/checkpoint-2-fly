@@ -1,76 +1,127 @@
-<div class="container">
-    <div class="row main">
-        <div class="panel-heading">
-          <div class="panel-title text-center">
-            <h1 class="title">Edit Booking</h1>
-            <hr/>
-          </div>
-        </div>
-        <div class="main-login main-center">
-          <%= form_for (@booking) do |f| %>
-        <% if @booking.errors.any? %>
-        <div>
-            <p>
-              <%= pluralize(@booking.errors.count, "error") %>
-              found:
-            </p>
-            <ul>
-              <% @booking.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-              <% end %>
-            </ul>
-        </div>
-        <% end %>
-        <p>Total price for
-            <%= @booking.passengers.size %>
-            passenger(s):
-            <%= @booking.price %>
-            USD</p>
-        <div>
-            <%= render partial: "partials/flight", locals: { flight: @booking.flight, date: @booking.departure } %>
+<div class="main">
+    <%= render 'partials/errors', obj: @booking %>
+    <h1 class="title">Edit Booking</h1>
+    <div class="row">
+        <%= form_for (@booking) do |f| %>
+        <div class="col-md-6 col-lg-12 col-xl-6">
+            <div class="row">
+                <div class="col-md-12 col-lg-4 col-xl-4">
+                    <section class="panel panel-featured-left panel-featured-tertiary">
+                        <div class="panel-body">
+                            <div class="widget-summary">
+                                <div class="widget-summary-col widget-summary-col-icon">
+                                    <div class="summary-icon bg-tertiary">
+                                        <i class="fa fa-plane"></i>
+                                    </div>
+                                </div>
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <h4 class="title"><%= @booking.flight.airline.code %></h4>
+                                        <div class="info">
+                                            <strong class="amount">
+                                                <%= @booking.flight.departure.strftime "%H:%M" %>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div class="summary-footer">
+                                        <a class="text-muted text-uppercase"><%= @booking.flight.departure.strftime "%Y-%m-%d" %></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-12 col-lg-4 col-xl-4">
+                    <section class="panel panel-featured-left panel-featured-quartenary">
+                        <div class="panel-body">
+                            <div class="widget-summary">
+                                <div class="widget-summary-col widget-summary-col-icon">
+                                    <div class="summary-icon bg-quartenary">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <h4 class="title">Passengers</h4>
+                                        <div class="info">
+                                            <strong class="amount"><%= @booking.passengers.size %></strong>
+                                        </div>
+                                    </div>
+                                    <div class="summary-footer">
+                                        <a class="text-muted text-uppercase">(details below)</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-12 col-lg-4 col-xl-4">
+                    <section class="panel panel-featured-left panel-featured-secondary">
+                        <div class="panel-body">
+                            <div class="widget-summary">
+                                <div class="widget-summary-col widget-summary-col-icon">
+                                    <div class="summary-icon bg-secondary">
+                                        <i class="fa fa-usd"></i>
+                                    </div>
+                                </div>
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <h4 class="title">Total Price</h4>
+                                        <div class="info">
+                                            <strong class="amount">$
+                                                <%= @booking.price %></strong>
+                                        </div>
+                                    </div>
+                                    <div class="summary-footer">
+                                        <a class="text-muted text-uppercase">1 booking</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
         <%= hidden_field_tag "booking[departure]", @booking.departure %>
         <%= hidden_field_tag "booking[flight_id]", @booking.flight.id %>
         <%= hidden_field_tag "booking[user_id]", current_user.id %>
         <%= f.fields_for :passengers do |passengers_form| %>
-        <div class="form-group">
-          <%= passengers_form.label :name, "Full Names", class: "cols-sm-2 control-label" %>
-          <div class="cols-sm-10">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </span>
-              <%= passengers_form.text_field :name, class: "form-control", id:"passenger_name" %>
+        <div class="col-md-3">
+            <div class="panel">
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa" aria-hidden="true"></i>
+                            </span>
+                            <%= passengers_form.text_field :name, class: "form-control", id:"name", placeholder: "Full Names", autofocus: true %>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                            </span>
+                            <%= passengers_form.text_field :passport_number, class: "form-control", id:"p_number", placeholder: "Passport Number", autofocus: true %>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                            </span>
+                            <%= passengers_form.text_field :phone, class: "form-control", id:"phone", placeholder: "Phone Number", autofocus: true %>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <%= passengers_form.label :passport_number, "Passport Number", class: "cols-sm-2 control-label" %>
-          <div class="cols-sm-10">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-book" aria-hidden="true"></i>
-              </span>
-              <%= passengers_form.text_field :passport_number, class: "form-control", id:"p_number" %>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <%= passengers_form.label :phone, "Phone Number", class: "cols-sm-2 control-label" %>
-          <div class="cols-sm-10">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-              </span>
-              <%= passengers_form.text_field :phone, class: "form-control", id:"phone" %>
-            </div>
-          </div>
         </div>
         <% end %>
-        <div class="form-group">
-          <%= f.submit "Save", class: "btn btn-primary btn-lg btn-block login-button" %>
-        </div>
-      <% end %>
+        <%= f.submit "Save", class: "btn btn-info btn-lg btn-block login-button" %>
+        <% end %>
     </div>
-  </div>
 </div>
