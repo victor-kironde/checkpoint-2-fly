@@ -16,7 +16,6 @@ gem 'figaro'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'bootstrap_form'
 
-
 group :test do
   gem 'capybara'
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
