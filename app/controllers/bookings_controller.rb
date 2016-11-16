@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
       redirect_to @booking
       flash[:success] = booking_saved
     else
-      params[:passengers] = booking_params[:passengers_attributes].length
+      params[:passengers] = booking_params.to_h[:passengers_attributes].length
       params[:departure] = booking_params[:departure]
       render "new"
     end
