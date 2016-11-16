@@ -8,73 +8,81 @@
 			</div>
 		</div>
 		<div class="main-login main-center">
-      <%= form_for @booking do |f| %>
-    <p>Total price for
-      <%= params[:passengers] %> passenger(s): <%= total_booking_cost(@booking.flight, params[:passengers]) %> USD</p>
-    <div class="panel">
-      <%= render partial: "partials/flight", locals: { flight: @booking.flight, date: Time.parse(params[:departure]) } %>
-    </div>
+			<%= form_for @booking do |f| %>
+			<p>Total price for
+				<%= params[:passengers] %>
+				passenger(s):
+				<%= total_booking_cost(@booking.flight, params[:passengers]) %>
+				USD</p>
+			<div class="panel">
+				<%= render partial: "partials/flight", locals: { flight: @booking.flight, date: Time.parse(params[:departure]) } %>
+			</div>
 
-
-      <div class="form-group">
-        <% if current_user %>
+			<div class="form-group">
+				<% if current_user %>
 				<%= hidden_field_tag "booking[email]", current_user.email%>
-        <% else %>
+
 				<div class="cols-sm-10">
 					<div class="input-group">
+					<% else %>
 						<span class="input-group-addon">
 							<i class="fa fa-envelope fa" aria-hidden="true"></i>
 						</span>
+
 						<%= f.email_field :email, class: "form-control", id:"email", placeholder: "Email", autofocus: true %>
-            <% end %>
+						<% end %>
+					</div>
+
+				</div>
+			</div>
+			<%= hidden_field_tag "booking[departure]", params[:departure] %>
+			<%= hidden_field_tag "booking[flight_id]", @booking.flight.id %>
+			<%= hidden_field_tag "booking[user_id]", current_user_or_default.id %>
+			<% counter = 1 %>
+			<%= f.fields_for :passengers do |passengers_form| %>
+			<p>
+				<b>Passenger
+					<%="#{counter}"%></b>
+			</p>
+			<div class="form-group">
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-user fa" aria-hidden="true"></i>
+						</span>
+						<%= passengers_form.text_field :name, class: "form-control", id:"name", placeholder: "Full Names", autofocus: true %>
 					</div>
 				</div>
 			</div>
-      <%= hidden_field_tag "booking[departure]", params[:departure] %>
-      <%= hidden_field_tag "booking[flight_id]", @booking.flight.id %>
-      <%= hidden_field_tag "booking[user_id]", current_user_or_default.id %>
-        <% counter = 1 %>
-        <%= f.fields_for :passengers do |passengers_form| %>
-        <p><b>Passenger <%="#{counter}"%></b></p>
-          <div class="form-group">
-    				<div class="cols-sm-10">
-    					<div class="input-group">
-    						<span class="input-group-addon">
-    							<i class="fa fa-user fa" aria-hidden="true"></i>
-    						</span>
-                <%= passengers_form.text_field :name, class: "form-control", id:"name", placeholder: "Full Names", autofocus: true %>
-    					</div>
-    				</div>
-    			</div>
 
-          <div class="form-group">
-    				<div class="cols-sm-10">
-    					<div class="input-group">
-    						<span class="input-group-addon">
-    							<i class="fa fa-book" aria-hidden="true"></i>
-    						</span>
-                <%= passengers_form.text_field :passport_number, class: "form-control", id:"p_number", placeholder: "Passport Number", autofocus: true %>
-    					</div>
-    				</div>
-    			</div>
+			<div class="form-group">
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-book" aria-hidden="true"></i>
+						</span>
+						<%= passengers_form.text_field :passport_number, class: "form-control", id:"p_number", placeholder: "Passport Number", autofocus: true %>
+					</div>
+				</div>
+			</div>
 
-          <div class="form-group">
-    				<div class="cols-sm-10">
-    					<div class="input-group">
-    						<span class="input-group-addon">
-    							<i class="fa fa-phone" aria-hidden="true"></i>
-    						</span>
-                <%= passengers_form.text_field :phone, class: "form-control", id:"phone", placeholder: "Phone Number", autofocus: true %>
-    					</div>
-    				</div>
-    			</div>
-          <% counter +=1 %>
-        <% end %>
+			<div class="form-group">
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-phone" aria-hidden="true"></i>
+						</span>
+						<%= passengers_form.text_field :phone, class: "form-control", id:"phone", placeholder: "Phone Number", autofocus: true %>
+					</div>
+				</div>
+			</div>
+			<% counter +=1 %>
+			<% end %>
 
-      <button id="book" class="btn btn-success" type="submit">Book Flight
-      </button>
+			<button id="book" class="btn btn-success" type="submit">Book Flight
+			</button>
 
-<% end %>
-</div>
-</div>
+			<% end %>
+		</div>
+	</div>
 </div>
