@@ -26,7 +26,7 @@ module Messages
   def invalid_date_format
     "Invalid date entered."
   end
-  
+
   def no_flight_selected
     "No flight was selected."
   end
