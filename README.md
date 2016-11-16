@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/andela-vkironde/checkpoint-2-fly.svg?style=svg)](https://circleci.com/gh/andela-vkironde/checkpoint-2-fly)
 [![Coverage Status](https://coveralls.io/repos/github/andela-vkironde/checkpoint-2-fly/badge.svg?branch=develop)](https://coveralls.io/github/andela-vkironde/checkpoint-2-fly?branch=develop)
 
 # Rails-Fly
