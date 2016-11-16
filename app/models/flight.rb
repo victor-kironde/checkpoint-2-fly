@@ -33,7 +33,7 @@ class Flight < ApplicationRecord
   end
 
   def self.path(origin, destination)
-    if destination == ""
+    if destination.empty?
       where(origin: origin).order(price: :asc)
     else
       where(origin: origin, destination: destination).order(price: :asc)
