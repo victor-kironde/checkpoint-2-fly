@@ -26,10 +26,8 @@
             passenger(s):
             <%= @booking.price %>
             USD</p>
-        <% @flight = @booking.flight %>
-        <% @date = @booking.departure %>
         <div>
-            <%= render partial: "partials/flight" %>
+            <%= render partial: "partials/flight", locals: { flight: @booking.flight, date: @booking.departure } %>
         </div>
         <%= hidden_field_tag "booking[departure]", @booking.departure %>
         <%= hidden_field_tag "booking[flight_id]", @booking.flight.id %>
