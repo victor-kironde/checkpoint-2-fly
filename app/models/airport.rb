@@ -4,8 +4,7 @@ class Airport < ApplicationRecord
             :longitude, presence: true
 
   def self.get_airports
-    order(country: :asc,
-          city: :asc, name: :asc, code: :asc)
+    order(country: :asc)
   end
 
   def formatted

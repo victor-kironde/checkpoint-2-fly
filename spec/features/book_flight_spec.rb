@@ -14,13 +14,19 @@ RSpec.feature "Booking", js: true do
 
   scenario "User searches for flight and selects it for booking" do
     search_to_book
-    expect(page).to have_content("")
+    expect(page).to have_content("Book Flight")
   end
 
   scenario "User completes a full booking process" do
     search_to_book
     fill_in_booking_details(@user.email, @user.full_name, "B1234", "421528")
     expect(page).to have_content("Your booking was successfully created.")
+  end
+
+  scenario "User does not fill in the email" do
+    search_to_book
+    fill_in_booking_details("", @user.full_name, "B1234", "421528")
+    expect(page).to have_content("Email can't be blank")
   end
 
   scenario "User fills in no data" do

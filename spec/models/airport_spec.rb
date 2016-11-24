@@ -19,7 +19,7 @@ RSpec.describe Airport, type: :model do
   end
 
   describe ".get_airports" do
-    it "should return airports" do
+    it "should return airports ordered by country" do
       a = create(:airport, country: "A")
       b = create(:airport, country: "B")
       airports = Airport.get_airports

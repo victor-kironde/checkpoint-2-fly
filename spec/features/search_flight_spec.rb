@@ -36,4 +36,10 @@ RSpec.feature "Search Flight", js: true do
       "Invalid date entered."
     )
   end
+
+  scenario "User searches and does not select a flight" do
+    search_flights(@origin.formatted, @destination.formatted, "2017/02/02")
+    click_on("select")
+    expect(page).to have_content("No flight was selected")
+  end
 end

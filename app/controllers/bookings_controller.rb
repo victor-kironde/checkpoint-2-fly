@@ -54,13 +54,7 @@ class BookingsController < ApplicationController
 
   def manage
     if @booking
-      if can_edit(@booking)
-        redirect_to edit_booking_path(@booking)
-      else
-        redirect_to @booking
-        flash[:success] = booking_found
-      end
-
+      can_edit
     else
       redirect_to find_bookings_path
       flash[:danger] = booking_not_found
@@ -78,14 +72,20 @@ class BookingsController < ApplicationController
     @booking || flash[:danger] = booking_not_found
   end
 
-  def can_edit(booking)
-    current_user && current_user.email == booking.email
+  def can_edit
+    user = current_user && current_user.email == @booking.email
+    if user
+      redirect_to edit_booking_path(@booking)
+    else
+      redirect_to @booking
+      flash[:success] = booking_found
+    end
   end
 
   def booking_params
-    params.require(:booking).
-      permit(:email, :departure, :flight_id, :user_id,
-             passengers_attributes:
-             [:id, :name, :passport_number, :phone])
+    params.require(:booking)
+          .permit(:email, :departure, :flight_id, :user_id,
+                  passengers_attributes:
+                  [:id, :name, :passport_number, :phone])
   end
 end
