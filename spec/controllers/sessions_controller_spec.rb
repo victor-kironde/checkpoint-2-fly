@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe SessionsController, type: :controller do
   subject(:user) { create(:user) }
+
   describe "GET #new" do
     before(:each) { get :new }
     it "returns a status response of 200" do

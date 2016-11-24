@@ -1,4 +1,5 @@
-<div class="main">
+
+	<div class="main">
 		<%= render 'partials/errors', obj: @booking %>
 				<h1 class="title">New Booking</h1>
 <div class="">
@@ -99,6 +100,7 @@
 						class: "btn btn-default col-md-6", id: "add", style:"width:50%" %>
 				<%= link_to "Remove", new_booking_path(flight: @booking.flight.id, passengers: @booking.passengers.size - 1,  departure: params[:departure]),
 						class: "btn btn-default col-md-6", style:"width:50%", id: "remove" unless @booking.passengers.size == 1 %>
+
 			</div>
 			<hr>
 			<%= f.fields_for :passengers do |passengers_form| %>
@@ -107,7 +109,6 @@
 			<div class="form-group">
 				<div class="cols-sm-10">
 					<div class="input-group">
-					<% else %>
 						<span class="input-group-addon">
 							<i class="fa fa-user fa" aria-hidden="true"></i>
 						</span>
@@ -118,7 +119,6 @@
 			<div class="form-group">
 				<div class="cols-sm-10">
 					<div class="input-group">
-					<% else %>
 						<span class="input-group-addon">
 							<i class="fa fa-book" aria-hidden="true"></i>
 						</span>
@@ -143,6 +143,7 @@
 
 			<button id="book" class="btn btn-info btn-lg btn-block" style="width:100%" type="submit">Book Flight
 			</button>
+
 			<% end %>
 		</div>
 	</div>
