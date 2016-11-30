@@ -6,16 +6,16 @@
           <h2 class="panel-title">Flight Details</h2>
         </header>
         <div class="panel-body">
-          <div class="table-responsive">
+    <div id="no-more-tables">
     <table class="table table-bordered mb-none">
-      <thead class="info">
-        <th >
+      <tbody class="info">
+        <td data-title= "Airline" >
         <%=@booking.flight.airline.name %>
-      </th>
-        <th>
+      </td>
+        <td data-title = "Departure">
           <%= @booking.flight.departure.strftime "%Y-%m-%d" %>
-        </th>
-    </thead>
+        </td>
+    </tbody>
   </table>
 </div>
 </div>
@@ -25,7 +25,7 @@
       <h2 class="panel-title">Booking Details</h2>
     </header>
     <div class="panel-body">
-      <div class="table-responsive">
+      <div id="no-more-tables">
       <table class="table table-bordered mb-none">
         <thead>
           <tr>
@@ -37,9 +37,9 @@
         <tbody>
 
             <tr>
-              <td><%= @booking.reference %></td>
-              <td><%= @booking.updated_at.strftime '%Y-%m-%d %H:%M' %></td>
-              <td><%= @booking.price %> USD</td>
+              <td data-title="Confirmation"><%= @booking.reference %></td>
+              <td data-title="Date"><%= @booking.updated_at.strftime '%Y-%m-%d %H:%M' %></td>
+              <td data-title="Price"><%= @booking.price %> USD</td>
             </tr>
         </tbody>
       </table>
@@ -51,7 +51,7 @@
         <h2 class="panel-title">Passengers</h2>
       </header>
       <div class="panel-body">
-        <div class="table-responsive">
+        <div id="no-more-tables">
     <table class="table table-bordered mb-none">
       <thead>
         <tr>
@@ -63,9 +63,9 @@
       <tbody>
         <% @booking.passengers.each do |passenger| %>
           <tr>
-            <td><%= passenger.name %></td>
-            <td><%= passenger.passport_number %></td>
-            <td><%= passenger.phone %></td>
+            <td data-title="Name"><%= passenger.name %></td>
+            <td data-title="Passport Number"><%= passenger.passport_number %></td>
+            <td data-title="Phone Number"><%= passenger.phone %></td>
           </tr>
         <% end %>
       </tbody>

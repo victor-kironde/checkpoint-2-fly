@@ -1,8 +1,8 @@
-  <td><%= flight.origin_airport.city %></td>
-  <td><%= flight.destination_airport.city %></td>
-  <td><%= flight.departure.strftime "%H:%M" %> | <%= date.strftime "%Y-%m-%d" %></td>
-  <td><%= flight.airline.name %></td>
-  <td><%= flight.number %></td>
-  <td><%= flight.arrival_date(date) %></td>
-  <td><%= "#{flight.price} USD" %></td>
+  <td data-title="Origin"><%= flight.origin_airport.city %></td>
+  <td data-title="Destination"><%= flight.destination_airport.city %></td>
+  <td data-title="Departure"><%= flight.departure.strftime "%H:%M" %> | <%= date.strftime "%Y-%m-%d" %></td>
+  <td data-title="Airline"><%= flight.airline.name %></td>
+  <td data-title="Flight No"><%= flight.number %></td>
+  <td data-title="Arrival"><%= flight.arrival_date(date) %></td>
+  <td data-title="Price"><%= "#{flight.price} USD" %></td>
 </tr>

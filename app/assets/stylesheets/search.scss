@@ -4,6 +4,17 @@
     margin: 3% 0;
     .form-div-element {
       flex-grow: 1;
-        margin-right: 1%;
+      margin-right: 1%;
     }
+}
+
+@media only screen and (max-width: 800px) {
+
+  .form-div {
+    flex-direction: column;
+    .form-div-element{
+      width: 100%;
+    }
+  }
+
 }

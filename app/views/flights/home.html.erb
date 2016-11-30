@@ -1,12 +1,8 @@
 <h1 id="title" class="title">Welcome to RAILS-FlY</h1>
 <div class="row" id="search-div">
-    <div class="col-md-12">
-        <div >
             <%= render partial:  "partials/search_flights_form", locals: { airports: @airports } %>
-        </div>
         <div id="search-errors"></div>
         <div class="col-md-12" id="results">
         </div>
-    </div>
 
 </div>
