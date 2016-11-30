@@ -18,12 +18,10 @@ class BookingsController < ApplicationController
     flight = Flight.find_by id: booking_params[:flight_id]
     @booking = flight.bookings.new(booking_params)
     if @booking.save
-      BookingMailer.booking_confirmation(@booking).deliver_now
-      redirect_to @booking
+      send_email
       flash[:success] = booking_saved
     else
-      params[:passengers] = booking_params.to_h[:passengers_attributes].length
-      params[:departure] = booking_params[:departure]
+      set_params
       render "new"
     end
   end
@@ -36,12 +34,10 @@ class BookingsController < ApplicationController
 
   def update
     if @booking.update(booking_params)
-      BookingMailer.booking_confirmation(@booking).deliver_now
+      send_email
       flash[:success] = booking_updated
-      redirect_to @booking
     else
-      params[:passengers] = booking_params[:passengers_attributes].length
-      params[:departure] = booking_params[:departure]
+      set_params
       render "edit"
     end
   end
@@ -83,9 +79,23 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking)
-          .permit(:email, :departure, :flight_id, :user_id,
-                  passengers_attributes:
-                  [:id, :name, :passport_number, :phone])
+    params.require(:booking).
+      permit(
+        :email,
+        :departure,
+        :flight_id,
+        :user_id,
+        passengers_attributes: [:id, :name, :passport_number, :phone]
+      )
+  end
+
+  def send_email
+    BookingMailer.booking_confirmation(@booking).deliver_now
+    redirect_to @booking
+  end
+
+  def set_params
+    params[:passengers] = booking_params.to_h[:passengers_attributes].length
+    params[:departure] = booking_params[:departure]
   end
 end
