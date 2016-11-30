@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/andela-vkironde/checkpoint-2-fly.svg?branch=develop)](https://travis-ci.org/andela-vkironde/checkpoint-2-fly)
+[![Build Status](https://semaphoreci.com/api/v1/victa/checkpoint-2-fly/branches/develop/badge.svg)](https://semaphoreci.com/victa/checkpoint-2-fly)
 [![Coverage Status](https://coveralls.io/repos/github/andela-vkironde/checkpoint-2-fly/badge.svg?branch=develop)](https://coveralls.io/github/andela-vkironde/checkpoint-2-fly?branch=develop)
 
 # Rails-Fly
